@@ -1,0 +1,20 @@
+# Dependency directories
+node_modules/
+
+# Environment variables
+.env
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Build directories
+dist/
+build/
+
+# Temporary files and directories
+tmp/
+temp/
+
+# Mac system files
+.DS_Store
