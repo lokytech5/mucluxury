@@ -38,7 +38,7 @@ export default function Home() {
       {/* Start of Drawer */}
       <div className="drawer-side z-50">
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content space-y-5 no-underline rounded-box">
+        <ul className="menu p-4 w-80 min-h-full bg-accent text-base-content space-y-5 no-underline rounded-box">
            {/* Link items */}
 
            <div className="mt-10"></div>
