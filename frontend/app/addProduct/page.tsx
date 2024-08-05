@@ -1,22 +1,27 @@
 "use client"
 import React, { useReducer } from 'react';
 import { FaStore } from "react-icons/fa";
-import { ActionTypes, initialState, reducer } from '../utils/formReducer';
+import { ActionType, initialState, reducer, ProductFormData  } from '../utils/formReducer';
 import Pricing from './Pricing';
+import Publish from './Publish';
+import General from './General';
 
 const AddProductPage = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleNextStep = () => {
-    dispatch({ type: ActionTypes.NEXT_STEP});
-  }
+    dispatch({ type: ActionType.NEXT_STEP });
+  };
 
   const handlePrevStep = () => {
-    dispatch({ type: ActionTypes.PREV_STEP});
-  }
-  // const updateFormData = () => {
-  //   dispatch({ type: ActionTypes.UPDATE_FORM, payload: data});
-  // }
+    dispatch({ type: ActionType.PREV_STEP });
+  };
+
+  const updateFormData = (data: Partial<ProductFormData>) => {
+    dispatch({ type: ActionType.UPDATE_FORM, payload: data });
+  };
+
+
   return (
     <div className='min-h-screen bg-base-200 flex flex-col items-center p-4'>
       
