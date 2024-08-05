@@ -1,8 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { RiGuideLine, RiRegisteredLine } from "react-icons/ri";
-import { FaCode } from "react-icons/fa";
+import { RiRegisteredLine } from "react-icons/ri";
+import { MdDelete } from "react-icons/md";
+import { FaUserPlus } from "react-icons/fa";
+import { IoLogIn } from "react-icons/io5";
+import { MdOutlineAdd } from "react-icons/md";
+import { FaStore } from "react-icons/fa";
 
 const Drawer = () => {
   return (
@@ -53,7 +56,7 @@ const Drawer = () => {
                 className="flex items-center justify-between w-full"
               >
                 <div className="flex items-center">
-                  <AiOutlineFundProjectionScreen className="h-5 w-5 mr-5" />
+                  <FaStore className="h-5 w-5 mr-5" />
                   <span>Add Product</span>
                 </div>
               </Link>
@@ -65,8 +68,8 @@ const Drawer = () => {
                 className="flex items-center justify-between w-full"
               >
                 <div className="flex items-center">
-                  <RiGuideLine className="h-5 w-5 mr-5" />
-                  <span>Guides</span>
+                  <MdDelete className="h-5 w-5 mr-5" />
+                  <span>Delete Product</span>
                 </div>
                 <span className="badge badge-xs badge-info"></span>
               </Link>
@@ -78,8 +81,8 @@ const Drawer = () => {
                 className="flex items-center justify-between w-full"
               >
                 <div className="flex items-center">
-                  <FaCode className="h-5 w-5 mr-5" />
-                  <span>Analysis Code</span>
+                  <FaUserPlus className="h-5 w-5 mr-5" />
+                  <span>Add User</span>
                 </div>
                 <span className="badge badge-sm badge-warning">NEW</span>
               </Link>
@@ -93,6 +96,19 @@ const Drawer = () => {
                 <div className="flex items-center">
                   <RiRegisteredLine className="h-5 w-5 mr-5" />
                   <span>Register</span>
+                </div>
+                <span></span>
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/register"
+                className="flex items-center justify-between w-full"
+              >
+                <div className="flex items-center">
+                  <IoLogIn className="h-5 w-5 mr-5" />
+                  <span>LogIn</span>
                 </div>
                 <span></span>
               </Link>
