@@ -1,0 +1,70 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - development
+      - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - "admin" # Serverless admin application
+          - "monolithic" # Monolithic application
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies for admin service
+        if: matrix.service == 'admin'
+        run: npm install
+        working-directory: ./backend/admin
+
+      - name: Install dependencies for monolithic service
+        if: matrix.service == 'monolithic'
+        run: npm install
+        working-directory: ./backend
+
+      - name: Install Serverless Framework for admin service
+        if: matrix.service == 'admin'
+        run: npm install -g serverless
+
+      - name: Deploy Serverless Admin
+        if: matrix.service == 'admin'
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/production" ]; then
+            serverless deploy --stage production
+          else
+            serverless deploy --stage dev
+          fi
+        working-directory: ./backend/admin
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          # Add your MySQL connection string here
+
+      - name: Build and Deploy Monolithic Application
+        if: matrix.service == 'monolithic'
+        run: |
+          # Build the monolithic application
+          npm run build 
+          if [ "${{ github.ref }}" == "refs/heads/production" ]; then
+            npm run deploy:production  # Adjust this command according to your deploy process
+          else
+            npm run deploy:dev  # Adjust this command according to your deploy process
+          fi
+        working-directory: ./backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }} # Prisma database URL
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          OTHER_ENV_VARIABLES: ${{ secrets.OTHER_ENV_VARIABLES }}
