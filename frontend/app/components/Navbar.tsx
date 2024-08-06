@@ -1,5 +1,6 @@
 import React from "react";
 import UserMenu from "./UserMenu";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -26,8 +27,10 @@ const Navbar = () => {
             />
           </svg>
         </label>
-        <div className="navbar-start">
-          <a className="btn btn-ghost normal-case text-xl">Demo</a>
+        <div className="navbar-start normal-case text-xl">
+        <Link href="/">
+            MucLuxury
+        </Link>
         </div>
         <UserMenu />
       </div>

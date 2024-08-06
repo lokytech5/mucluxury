@@ -7,6 +7,8 @@ export interface ProductFormData  {
     color: string;
     quantity: number;
     images: FileList | null;
+    discount: string;
+    discountType: string;
     settings: {
       additionalSetting?: string;
     };
@@ -28,6 +30,8 @@ export interface ProductFormData  {
       color: '',
       quantity: 0,
       images: null,
+      discount: '',
+      discountType: '',
       settings: {}
     }
   };
