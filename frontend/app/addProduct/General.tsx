@@ -50,6 +50,19 @@ const General = ({formData, updateFormData}: Props) => {
       </select>
     </div>
 
+    <div className='form-control mb-4'>
+      <label className='label'>
+        <span className='label-text'>Color</span>
+      </label>
+      <input 
+        type='text' 
+        placeholder='Enter color' 
+        className='input input-bordered w-full' 
+        value={formData.color}
+        onChange={(e) => updateFormData({ color: e.target.value })}
+      />
+    </div>
+
     <div className='flex mb-4 gap-4'>
            <div className='w-1/2'>
              <label className='label'>
