@@ -7,8 +7,8 @@ export interface ProductFormData  {
     color: string;
     quantity: number;
     images: FileList | null;
-    discount: string; // New field for discount
-    discountType: string; // New field for discount type
+    discount: string;
+    discountType: string;
     settings: {
       additionalSetting?: string;
     };
@@ -30,8 +30,8 @@ export interface ProductFormData  {
       color: '',
       quantity: 0,
       images: null,
-      discount: '', // Initialize the discount field
-      discountType: '', // Initialize the discount type field
+      discount: '',
+      discountType: '',
       settings: {}
     }
   };
