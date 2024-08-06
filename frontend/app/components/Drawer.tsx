@@ -1,11 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { RiRegisteredLine } from "react-icons/ri";
-import { MdDelete } from "react-icons/md";
-import { FaUserPlus } from "react-icons/fa";
+import { MdOutlineInventory } from "react-icons/md";
+import { FaUserPlus, FaShoppingBag, FaStore  } from "react-icons/fa";
 import { IoLogIn } from "react-icons/io5";
-import { MdOutlineAdd } from "react-icons/md";
-import { FaStore } from "react-icons/fa";
 
 const Drawer = () => {
   return (
@@ -15,10 +13,10 @@ const Drawer = () => {
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <ul className="menu p-4 w-80 min-h-full bg-accent text-base-content space-y-5 no-underline rounded-box">
+      <ul className="menu p-4 w-80 min-h-screen bg-accent text-base-content space-y-5 no-underline rounded-box">
         {/* Link items */}
 
-        <div className="mt-10"></div>
+        <div className="mt-4"></div>
 
         <div className="bg-gradient-to-br from-blue-600 to-purple-500 rounded-lg p-8 shadow-xl transform transition duration-500 hover:scale-105">
           <h2 className="text-xl font-bold text-white">MUCLUXURY Dashboard!</h2>
@@ -49,18 +47,97 @@ const Drawer = () => {
             Admin Sections
           </h2>
 
-          <ul className="space-y-5">
+          <ul className="menu space-y-5 rounded-box">
+
+
             <li>
+              <details className="flex items-center">
+                <summary> <FaStore className="h-5 w-5 mr-3" /> Product</summary>
+
+                <ul className="flex flex-col items-center mt-4 space-y-4">
+                  <li>
               <Link
                 href="/addProduct"
-                className="flex items-center justify-between w-full"
-              >
-                <div className="flex items-center">
-                  <FaStore className="h-5 w-5 mr-5" />
-                  <span>Add Product</span>
-                </div>
+                className="w-full text-center">
+                View Product
               </Link>
+
+                  </li>
+
+                  <li>
+              <Link
+                href="/addProduct"
+                className="w-full text-center">
+                Add Product
+              </Link>
+
+                  </li>
+
+                  <li>
+              <Link
+                href="/addProduct"
+                className="w-full text-center">
+                Delete Product
+              </Link>
+
+                  </li>
+                </ul>
+              </details>
             </li>
+
+            <li>
+              <details className="flex items-center">
+                <summary> <FaShoppingBag className="h-5 w-5 mr-3" /> Order</summary>
+
+                <ul className="flex flex-col items-center mt-4 space-y-4">
+                  <li>
+              <Link
+                href="#"
+                className="w-full text-center">
+                View Order
+              </Link>
+
+                  </li>
+
+                  <li>
+              <Link
+                href="#"
+                className="w-full text-center">
+                Delete Order
+              </Link>
+
+                  </li>
+                </ul>
+              </details>
+            </li>
+
+            <li>
+              <details className="flex items-center">
+                <summary> <FaUserPlus className="h-5 w-5 mr-3" /> Customer</summary>
+
+                <ul className="flex flex-col items-center mt-4 space-y-4">
+                  <li>
+              <Link
+                href="#"
+                className="w-full text-center">
+                Customer Details
+              </Link>
+
+                  </li>
+
+                  <li>
+              <Link
+                href="#"
+                className="w-full text-center">
+                Delete Customer
+              </Link>
+
+                  </li>
+                </ul>
+              </details>
+            </li>
+
+          
 
             <li>
               <Link
@@ -68,21 +145,8 @@ const Drawer = () => {
                 className="flex items-center justify-between w-full"
               >
                 <div className="flex items-center">
-                  <MdDelete className="h-5 w-5 mr-5" />
-                  <span>Delete Product</span>
-                </div>
-                <span className="badge badge-xs badge-info"></span>
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                href="/codeAnalysis"
-                className="flex items-center justify-between w-full"
-              >
-                <div className="flex items-center">
-                  <FaUserPlus className="h-5 w-5 mr-5" />
-                  <span>Add User</span>
+                  <MdOutlineInventory className="h-5 w-5 mr-5" />
+                  <span>Inventory</span>
                 </div>
                 <span className="badge badge-sm badge-warning">NEW</span>
               </Link>
@@ -90,7 +154,7 @@ const Drawer = () => {
 
             <li>
               <Link
-                href="/register"
+                href="#"
                 className="flex items-center justify-between w-full"
               >
                 <div className="flex items-center">
@@ -101,9 +165,10 @@ const Drawer = () => {
               </Link>
             </li>
 
+
             <li>
               <Link
-                href="/register"
+                href="#"
                 className="flex items-center justify-between w-full"
               >
                 <div className="flex items-center">
