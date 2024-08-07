@@ -27,6 +27,13 @@ jobs:
         run: npm run build
         working-directory: ./backend
 
+      - name: Install Serverless Framework CLI
+        run: npm install -g serverless
+
+      - name: Install dependencies for serverless
+        run: npm install
+        working-directory: ./backend/mucluxury-admin
+
       - name: Build Docker image
         run: docker build -t my-backend-app .
         working-directory: ./backend
@@ -37,6 +44,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
+      - name: Deploy Serverless Functions
+        run: serverless deploy
+        working-directory: ./backend/mucluxury-admin
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 
       - name: Log in to Amazon ECR Public
         run: |
