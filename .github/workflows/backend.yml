@@ -40,17 +40,17 @@ jobs:
 
       - name: Log in to Amazon ECR Public
         run: |
-          aws ecr-public get-login-password | docker login --username AWS --password-stdin public.ecr.aws
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g6v1i2e9
 
       - name: Tag Docker image
-        run: docker tag my-backend-app:latest public.ecr.aws/g6v1i2e9/mucluxury-backend:latest
+        run: docker tag my-backend-app:latest public.ecr.aws/g6v1i2e9/my-backend-app:latest
 
       - name: Push Docker image to ECR Public
-        run: docker push public.ecr.aws/g6v1i2e9/mucluxury-backend:latest
+        run: docker push public.ecr.aws/g6v1i2e9/my-backend-app:latest
 
       - name: Deploy to ECS
         run: |
-          aws ecs update-service --region us-east-1 --cluster Mucluxury --service mucluxury-backend-service --force-new-deployment
+          aws ecs update-service --region us-east-1 --cluster mucluxury-cluster --service mucluxury-service --force-new-deployment
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
