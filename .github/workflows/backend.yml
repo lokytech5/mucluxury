@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies for serverless
         run: npm install
-        working-directory: backend/mucluxury-admin
+        working-directory: backend/admin/mucluxury-admin
 
       - name: Build Docker image
         run: docker build -t my-backend-app .
@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy Serverless Functions
         run: serverless deploy
-        working-directory: backend/mucluxury-admin
+        working-directory: backend/admin/mucluxury-admin
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
