@@ -1,0 +1,56 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - development
+      - production
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./backend
+
+      - name: Compile TypeScript
+        run: npm run build
+        working-directory: ./backend
+
+      - name: Build Docker image
+        run: docker build -t my-backend-app .
+        working-directory: ./backend
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Log in to Amazon ECR Public
+        run: |
+          aws ecr-public get-login-password | docker login --username AWS --password-stdin public.ecr.aws
+
+      - name: Tag Docker image
+        run: docker tag my-backend-app:latest public.ecr.aws/g6v1i2e9/mucluxury-backend:latest
+
+      - name: Push Docker image to ECR Public
+        run: docker push public.ecr.aws/g6v1i2e9/mucluxury-backend:latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service --region us-east-1 --cluster Mucluxury --service mucluxury-backend-service --force-new-deployment
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
